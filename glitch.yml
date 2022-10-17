@@ -361,13 +361,6 @@ pcbs:
       mbb2:
         $extends: mousebites
         anchor.ref: mirror_matrix_pinky_bottom
-pcbs:
-  lisa:
-    outlines:
-      boards:
-        outline: raw
-
-
 
 
   
