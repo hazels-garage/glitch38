@@ -1,0 +1,373 @@
+units:
+  visual_x: 17.5
+  visual_y: 16.5
+  w: 19
+  h: 17
+
+mousebites:
+  type: mousebites
+  anchor: 
+    rotate: 90
+    shift: [-.5w, 0]
+points:
+  mirror:
+    ref: matrix_pinky_bottom
+    distance: -w - 2
+  zones:
+    matrix:
+      rotate: 
+      columns:
+        pinky:
+          key:
+            column_net: D4
+            mirror:
+              column_net: F6
+        ring:
+          rotate: -10
+          stagger: 0.75h
+          spread: w
+          key:
+            column_net: C6
+            mirror:
+              column_net: F7
+        middle:
+          rotate: -5
+          stagger: 0.75h
+          spread: w
+          key:
+            column_net: D7
+            mirror:
+              column_net: B1
+        index:
+          stagger: -0.5h
+          spread: w
+          key:
+            column_net: E6
+            mirror:
+              column_net: B3
+        inner:
+          stagger: -0.25h
+          spread: w
+          key:
+            column_net: B4
+            mirror: 
+              column_net: B2
+      rows:
+        bottom:
+          padding: h
+          row_net: B2
+          mirror:
+            row_net: B4
+        home:
+          padding: h
+          row_net: B3
+          mirror:
+            row_net: E6
+        top:
+          padding: h
+          row_net: B1
+          mirror:
+            row_net: D7
+    thumb:
+      anchor:
+        ref: matrix_middle_bottom
+        shift: [.25w, -1.5h]
+        # rotate: 10
+      columns:
+        outer:
+          key:
+            name: thumb_outer
+            column_net: C6
+            rotate: 180
+            mirror: 
+              column_net: F7
+        middle1:
+          spread: w
+          rotate: -10
+          origin: [-.5h, -.5w]
+          key:
+            name: thumb_middle1
+            rotate: 180
+            column_net: D7
+            mirror:
+              column_net: B1
+        middle2:
+          spread: w
+          rotate: -10
+          origin: [-.5h, -.5w]
+          key:
+            name: thumb_middle2
+            rotate: 180
+            column_net: E6
+            mirror:
+              column_net: B3             
+        inner:
+          spread: h
+          # shift: [0, 2]
+          origin: [10.5, -17]
+          rotate: -15
+          key:
+            name: thumb_inner
+            column_net: B4
+            rotate: -90
+            mirror:
+              column_net: B2
+
+            footprints:
+              choc:
+                params:
+                  width: 1.5
+      rows:
+        thumbs:
+          row_net: B6
+          mirror:
+            row_net: B5
+  key: 
+    bind: 2
+    footprints:
+      choc:
+        type: choc
+        anchor: 
+        nets:
+          from: =colrow
+          to: =column_net
+        params:
+          keycaps: false
+          reverse: false
+      diode:
+        type: diode
+        anchor:
+          rotate: 0
+          shift: [ 0, -4.5 ]
+        nets:
+          from: =colrow
+          to: =row_net
+outlines:
+  exports:
+    raw:
+      - type: keys
+        side: left
+        size: [cx, cy]
+        corner: 1
+    mousebites:
+      - type: rectangle
+        mirror: true
+        size: [1.5, 6.25]
+        anchor:
+          ref: matrix_pinky_top
+          shift: [-10.5,-3.125]
+      - type: rectangle
+        mirror: true
+        size: [1.5, 6.25]
+        anchor:
+          ref: matrix_pinky_home
+          shift: [-10.5,-3.125]
+      - type: rectangle
+        mirror: true
+        size: [1.5, 6.25]
+        anchor:
+          ref: matrix_pinky_bottom
+          shift: [-10.5,-3.125]
+
+                           
+    board:
+      - type: polygon
+        mirror: true
+        points:
+          - ref: matrix_pinky_bottom
+            shift: [-.5w, -.5h]
+          - ref: matrix_pinky_top
+            shift: [ -.5w, .5h ]
+          - ref: matrix_inner_top
+            shift: [ .5w , .5h]
+          - ref: matrix_inner_top
+            shift: [ .5w, 3]
+          - ref: matrix_inner_top
+            shift: [ 28, 3 ]
+          - ref: matrix_inner_bottom
+            shift: [ 28, -4 ]
+          - ref: thumb_inner
+            shift: [-.75w,.5h]
+          - ref: thumb_inner
+            shift: [ .75w, .5h]
+    switches: 
+      - type: keys
+        side: left
+        size: 14
+        bound: false
+    top_arc_left_intersect:
+      - type: polygon
+        mirror: true
+        points:
+          - ref: matrix_pinky_top
+            shift: [-.5w, -h]
+          - ref: matrix_middle_top
+            shift: [.5w, -h]
+          - ref: matrix_middle_top
+            shift: [.5w, 2h]
+          - ref: matrix_pinky_top
+            shift: [-.5w, 3h]        
+    top_arc_right_intersect:
+      - type: polygon
+        mirror: true
+        points:
+          - ref: matrix_middle_top
+            shift: [.125w, -h]
+          - ref: matrix_middle_top
+            shift: [.25w,3h]
+          - ref: matrix_inner_top
+            shift: [.5w, 3h]
+          - ref: matrix_inner_top
+            shift: [.5w, -.5h]        
+    arc_top_left:
+      - type: circle
+        mirror: true
+        anchor:
+          ref: matrix_middle_bottom
+          shift: [2.2, -25.155]
+        radius: 68.7
+      - type: outline
+        name: top_arc_left_intersect
+        operation: intersect
+
+    arc_top_right:
+      - type: circle
+        mirror: true
+        anchor:
+          ref: matrix_middle_bottom
+          shift: [-5.58, -100.15]
+        radius: 144.02
+      - type: outline
+        name: top_arc_right_intersect
+        operation: intersect
+    panel:
+      - type: outline
+        name: board
+        fillet: 2
+      - type: outline
+        name: mousebites
+        fillet: .5
+      - type: outline
+        name: arc_top_left
+        fillet: 4
+      - type: outline
+        name: arc_top_right
+        fillet: 2
+    plate:
+      main:
+        type: outline
+        name: panel
+        fillet: 1
+      keyholes:
+        type: outline
+        name: switches
+        operation: subtract      
+
+pcbs:
+  glitch:
+    outlines:
+      boards:
+        outline: panel
+    footprints:
+      mcu_left:
+        type: promicro
+        anchor:
+          ref: matrix_inner_top
+          shift: [18.5, -13]
+          rotate: -90
+        params:
+          orientation: up
+      mcu_right:
+        type: promicro
+        anchor:
+          ref: mirror_matrix_inner_top
+          shift: [18.5, -13]
+          rotate: 90
+        params:
+          orientation: up       
+      trrs_left:
+        type: trrs
+        nets:
+          A: GND
+          B: GND
+          C: D2
+          D: VCC
+        anchor:
+          ref: matrix_inner_bottom
+          shift: [26, -3.5]
+          rotate: -90
+        params:
+          reverse: false
+          symmetric: false
+      trrs_right:
+        type: trrs
+        nets:
+          A: GND
+          B: GND
+          C: D2
+          D: VCC
+        anchor:
+          ref: mirror_matrix_inner_bottom
+          shift: [26, 1]
+          rotate: -90
+        params:
+          symmetric: false
+      oled_left:
+        type: oled
+        anchor:
+          ref: matrix_inner_bottom
+          shift: [12.5, 2.5]
+        nets:
+          SDA: D1
+          SCL: D0
+
+
+      oled_right:
+        type: oled
+        anchor:
+          ref: mirror_matrix_inner_bottom
+          shift: [24.5, 2.5]
+          rotate: -90
+        nets:
+          SDA: D1
+          SCL: D0
+      puck_left:
+        type: puck
+        anchor:
+          ref: 
+            - matrix_middle_home
+          shift: [.5w, -11.5]
+      puck_right:
+        type: puck
+        anchor:
+          ref:
+            - mirror_matrix_middle_home
+          shift: [-.5w, -11.5]
+      mbt1:
+        $extends: mousebites
+        anchor.ref: matrix_pinky_top
+      mbt2: 
+        $extends: mousebites
+        anchor.ref: mirror_matrix_pinky_top
+      mbh1:
+        $extends: mousebites
+        anchor.ref: matrix_pinky_home
+      mbh2:
+        $extends: mousebites
+        anchor.ref: mirror_matrix_pinky_home
+      mbb1:
+        $extends: mousebites
+        anchor.ref: matrix_pinky_bottom
+      mbb2:
+        $extends: mousebites
+        anchor.ref: mirror_matrix_pinky_bottom
+pcbs:
+  lisa:
+    outlines:
+      boards:
+        outline: raw
+
+
+
+
+  
